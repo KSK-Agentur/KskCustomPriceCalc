@@ -17,6 +17,12 @@ Ext.define('Shopware.apps.KskCustomPriceCalc.view.form.Currency', {
             supportText: '{s name="ActiveSupportText"}{/s}'
         });
         result.push({
+            xtype: 'config-element-boolean',
+            name: 'alwaysUp',
+            fieldLabel: '{s name="AlwaysUpLabel"}{/s}',
+            supportText: '{s name="AlwaysUpSupportText"}{/s}'
+        });
+        result.push({
             xtype: 'combobox',
             name: 'precision',
             store: [

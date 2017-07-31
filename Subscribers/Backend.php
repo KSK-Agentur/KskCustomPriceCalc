@@ -17,6 +17,8 @@ class Backend implements SubscriberInterface
 {
     const PARAM_ACTIVE = 'active';
 
+    const PARAM_ALWAYS_UP = 'alwaysUp';
+
     const PARAM_PRECISION = 'precision';
 
     const PARAM_SUBTRAHEND = 'subtrahend';
@@ -107,10 +109,11 @@ class Backend implements SubscriberInterface
                 return;
             }
             $active = (bool) $controller->Request()->getParam(static::PARAM_ACTIVE, false);
+            $alwaysUp = (bool) $controller->Request()->getParam(static::PARAM_ALWAYS_UP, false);
             $precision = (int) $controller->Request()->getParam(static::PARAM_PRECISION, 10);
             $subtrahend = (float) $controller->Request()->getParam(static::PARAM_SUBTRAHEND, 1);
 
-            $this->updateCurrencySettings($currencyId, $active, $precision, $subtrahend);
+            $this->updateCurrencySettings($currencyId, $active, $alwaysUp, $precision, $subtrahend);
         }
 
         if ($controller->Request()->getActionName() === 'getList'
@@ -132,7 +135,7 @@ class Backend implements SubscriberInterface
      * @param $precision
      * @param $subtrahend
      */
-    private function updateCurrencySettings($currencyId, $active, $precision, $subtrahend)
+    private function updateCurrencySettings($currencyId, $active, $alwaysUp, $precision, $subtrahend)
     {
         /** @var CurrencySettings $currencySettings */
         $currencySettings = $this->currencySettingsRepository->findOneBy(['currencyId' => $currencyId]);
@@ -143,6 +146,7 @@ class Backend implements SubscriberInterface
 
         $currencySettings->setCurrencyId($currencyId);
         $currencySettings->setActive($active);
+        $currencySettings->setAlwaysUp($alwaysUp);
         $currencySettings->setPrecision($precision);
         $currencySettings->setSubtrahend($subtrahend);
 
@@ -160,10 +164,12 @@ class Backend implements SubscriberInterface
 
         if ($currencySettings === null) {
             $currency[static::PARAM_ACTIVE] = false;
+            $currency[static::PARAM_ALWAYS_UP] = false;
             $currency[static::PARAM_PRECISION] = CurrencySettings::DEFAULT_VALUE_PRECISION;
             $currency[static::PARAM_SUBTRAHEND] = CurrencySettings::DEFAULT_VALUE_SUBTRAHEND;
         } else {
             $currency[static::PARAM_ACTIVE] = $currencySettings->getActive();
+            $currency[static::PARAM_ALWAYS_UP] = $currencySettings->getAlwaysUp();
             $currency[static::PARAM_PRECISION] = $currencySettings->getPrecision();
             $currency[static::PARAM_SUBTRAHEND] = $currencySettings->getSubtrahend();
         }

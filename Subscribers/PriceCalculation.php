@@ -161,6 +161,11 @@ class PriceCalculation implements SubscriberInterface
         $displayPrice = ($customerGroup->displayGrossPrices()) ? $price * (100 + $tax->getTax()) / 100 : $price;
 
         $newPrice = round($displayPrice, $roundingPrecision, PHP_ROUND_HALF_UP);
+
+        if ($currencySettings->getAlwaysUp() && $newPrice < $displayPrice) {
+            $newPrice = round($displayPrice + $precision / 2, $roundingPrecision, PHP_ROUND_HALF_UP);
+        }
+
         $newPrice = $newPrice - $currencySettings->getSubtrahend();
 
         if ($customerGroup->displayGrossPrices()) {

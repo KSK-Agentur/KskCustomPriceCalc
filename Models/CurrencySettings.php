@@ -40,6 +40,13 @@ class CurrencySettings extends ModelEntity
     private $active;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="always_up", type="boolean")
+     */
+    private $alwaysUp;
+
+    /**
      * @var int
      * @ORM\Column(name="precision_value", type="integer")
      */
@@ -97,6 +104,22 @@ class CurrencySettings extends ModelEntity
     public function setActive($active)
     {
         $this->active = $active;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAlwaysUp()
+    {
+        return $this->alwaysUp;
+    }
+
+    /**
+     * @param bool $alwaysUp
+     */
+    public function setAlwaysUp($alwaysUp)
+    {
+        $this->alwaysUp = $alwaysUp;
     }
 
     /**
