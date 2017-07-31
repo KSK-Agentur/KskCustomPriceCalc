@@ -34,6 +34,9 @@ class KskCustomPriceCalc extends Plugin
         $this->createSchema();
     }
 
+    /**
+     * @param UpdateContext $context
+     */
     public function update(UpdateContext $context)
     {
         $this->createSchema();

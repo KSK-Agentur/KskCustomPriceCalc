@@ -4,6 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <!-- SUBSCRIBERS -->
         <service id="ksk_custom_price_calc.subscribers.price_calculation" class="KskCustomPriceCalc\Subscribers\PriceCalculation">
             <argument type="service" id="models" />
             <argument type="service" id="shopware_storefront.tax_hydrator_dbal" />

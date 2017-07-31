@@ -14,6 +14,10 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Tax;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Models\Tax\Tax as TaxModel;
 
+/**
+ * Class PriceCalculation
+ * @package KskCustomPriceCalc\Subscribers
+ */
 class PriceCalculation implements SubscriberInterface
 {
     /**
@@ -87,6 +91,10 @@ class PriceCalculation implements SubscriberInterface
         ];
     }
 
+    /**
+     * @param Enlight_Event_EventArgs $args
+     * @return float|int
+     */
     public function filterPrice(Enlight_Event_EventArgs $args)
     {
         $price = $args->getReturn();
@@ -100,6 +108,10 @@ class PriceCalculation implements SubscriberInterface
         return $this->calculateCustomPrice($price, $tax, $context, $customerGroup);
     }
 
+    /**
+     * @param Enlight_Event_EventArgs $args
+     * @return array
+     */
     public function onUpdatePrice(Enlight_Event_EventArgs $args)
     {
         /** @var array $return */
@@ -123,6 +135,13 @@ class PriceCalculation implements SubscriberInterface
         return $return;
     }
 
+    /**
+     * @param $price
+     * @param Tax $tax
+     * @param ProductContextInterface $context
+     * @param Group $customerGroup
+     * @return float|int
+     */
     private function calculateCustomPrice($price, Tax $tax, ProductContextInterface $context, Group $customerGroup)
     {
         $currency = $context->getCurrency();

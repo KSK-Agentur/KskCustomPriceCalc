@@ -9,6 +9,10 @@ use KskCustomPriceCalc\Models\CurrencySettings;
 use Shopware\Components\Model\ModelManager;
 use Shopware_Controllers_Backend_Config;
 
+/**
+ * Class Backend
+ * @package KskCustomPriceCalc\Subscribers
+ */
 class Backend implements SubscriberInterface
 {
     const PARAM_ACTIVE = 'active';
@@ -80,6 +84,9 @@ class Backend implements SubscriberInterface
         ];
     }
 
+    /**
+     * @param Enlight_Event_EventArgs $args
+     */
     public function onPostDispatchSecureBackendConfig(Enlight_Event_EventArgs $args)
     {
         /** @var Shopware_Controllers_Backend_Config $controller */
@@ -119,6 +126,12 @@ class Backend implements SubscriberInterface
         }
     }
 
+    /**
+     * @param $currencyId
+     * @param $active
+     * @param $precision
+     * @param $subtrahend
+     */
     private function updateCurrencySettings($currencyId, $active, $precision, $subtrahend)
     {
         /** @var CurrencySettings $currencySettings */
