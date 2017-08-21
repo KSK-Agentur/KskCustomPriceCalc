@@ -10,17 +10,23 @@
     <compatibility minVersion="5.2.0" />
 
     <changelog version="1.0.0">
-        <changes>Zusatzkonfiguration pro Währung</changes>
-        <changes>Auf- und Abrunden auf den nächsten 10er, 100er oder 1000er</changes>
-        <changes>Nach dem Runden einen Wert subtrahieren</changes>
+        <changes lang="de">Zusatzkonfiguration pro Währung</changes>
+        <changes lang="de">Auf- und Abrunden auf den nächsten 10er, 100er oder 1000er</changes>
+        <changes lang="de">Nach dem Runden einen Wert subtrahieren</changes>
+        <changes lang="en">Additional configuration per currency</changes>
+        <changes lang="en">Round up and down to the next 10's, 100's or 1000's</changes>
+        <changes lang="en">Subtract a value after rounding</changes>
     </changelog>
     <changelog version="1.0.1">
-        <changes>Fehler behoben: Im Backend wurden die neuen Konfigurationsfelder nicht angezeigt.</changes>
+        <changes lang="de">Fehler behoben: Im Backend wurden die neuen Konfigurationsfelder nicht angezeigt.</changes>
+        <changes lang="en">Bugfix: Configuration field did not show up in the backend.</changes>
     </changelog>
     <changelog version="1.1.0">
-        <changes>Neue Funktion "AlwaysUp": Preise immer aufrunden. Auch wenn sie eigentlich abgerundet würden.</changes>
+        <changes lang="de">Neue Funktion "AlwaysUp": Preise immer aufrunden. Auch wenn sie eigentlich abgerundet würden.</changes>
+        <changes lang="en">New feature "AlwaysUp": Prices will always be rounded up. Even if they would normally be rounded down.</changes>
     </changelog>
     <changelog version="1.1.1">
-        <changes>Bugfix: Kompatibilität mit Shopware 5.3 verbessert.</changes>
+        <changes lang="de">Bugfix: Kompatibilität mit Shopware 5.3 verbessert.</changes>
+        <changes lang="en">Bugfix: Improved compatibility for Shopware 5.3.</changes>
     </changelog>
 </plugin>
