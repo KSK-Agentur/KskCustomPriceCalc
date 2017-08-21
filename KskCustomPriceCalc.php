@@ -8,11 +8,13 @@ use Enlight_Event_EventArgs;
 use KskCustomPriceCalc\Models\CurrencySettings;
 use KskCustomPriceCalc\Services\PriceCalculationService;
 use Shopware\Bundle\StoreFrontBundle\Gateway\PriceGroupDiscountGatewayInterface;
+use Shopware\Bundle\StoreFrontBundle\Service\PriceCalculatorInterface;
 use Shopware\Components\Logger;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Components\Plugin;
 use Shopware\Components\Plugin\Context\InstallContext;
 use Shopware\Components\Plugin\Context\UpdateContext;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Class KskCustomPriceCalc
@@ -75,11 +77,20 @@ class KskCustomPriceCalc extends Plugin
      */
     public function decoratePriceCalculationService(Enlight_Event_EventArgs $args)
     {
-        /** @var PriceGroupDiscountGatewayInterface $priceGroupDiscountGateway */
-        $priceGroupDiscountGateway = $this->container->get('shopware_storefront.price_group_discount_gateway');
+        try {
+            // Shopware 5.3
+
+            /** @var PriceCalculatorInterface $argument */
+            $argument = $this->container->get('shopware_storefront.price_calculator');
+        } catch (ServiceNotFoundException $exception) {
+            // Shopware 5.2
+
+            /** @var PriceGroupDiscountGatewayInterface $argument */
+            $argument = $this->container->get('shopware_storefront.price_group_discount_gateway');
+        }
 
         $this->container->set('shopware_storefront.price_calculation_service', new PriceCalculationService(
-            $priceGroupDiscountGateway
+            $argument
         ));
     }
 }
