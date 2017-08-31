@@ -26,6 +26,7 @@ Ext.define('Shopware.apps.KskCustomPriceCalc.view.form.Currency', {
             xtype: 'combobox',
             name: 'precision',
             store: [
+                [0.1, '{s name="PrecisionValue01"}{/s}'],
                 [1, '{s name="PrecisionValue1"}{/s}'],
                 [10, '{s name="PrecisionValue10"}{/s}'],
                 [100, '{s name="PrecisionValue100"}{/s}'],

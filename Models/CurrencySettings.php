@@ -47,8 +47,8 @@ class CurrencySettings extends ModelEntity
     private $alwaysUp;
 
     /**
-     * @var int
-     * @ORM\Column(name="precision_value", type="integer")
+     * @var float
+     * @ORM\Column(name="precision_value", type="float")
      */
     private $precision;
 
@@ -123,7 +123,7 @@ class CurrencySettings extends ModelEntity
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getPrecision()
     {
@@ -131,7 +131,7 @@ class CurrencySettings extends ModelEntity
     }
 
     /**
-     * @param int $precision
+     * @param float $precision
      */
     public function setPrecision($precision)
     {

@@ -2,6 +2,7 @@
 
 namespace KskCustomPriceCalc;
 
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\ToolsException;
 use Enlight_Event_EventArgs;
@@ -49,12 +50,21 @@ class KskCustomPriceCalc extends Plugin
         try {
             /** @var ModelManager $modelManager */
             $modelManager = $this->container->get('models');
+            /** @var AbstractSchemaManager $schemaManager */
+            $schemaManager = $modelManager->getConnection()->getSchemaManager();
 
             $tool = new SchemaTool($modelManager);
             $classes = [
-                $modelManager->getClassMetadata(CurrencySettings::class)
+                $modelManager->getClassMetadata(CurrencySettings::class),
             ];
-            $tool->createSchema($classes);
+
+            foreach($classes as $class) {
+                if (!$schemaManager->tablesExist($class->getTableName())) {
+                    $tool->createSchema([$class]);
+                } else {
+                    $tool->updateSchema([$class], true);
+                }
+            }
         } catch (ToolsException $exception) {
             /** @var Logger $pluginLogger */
             $pluginLogger = $this->container->get('pluginlogger');

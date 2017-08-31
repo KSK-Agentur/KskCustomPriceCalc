@@ -110,7 +110,7 @@ class Backend implements SubscriberInterface
             }
             $active = (bool) $controller->Request()->getParam(static::PARAM_ACTIVE, false);
             $alwaysUp = (bool) $controller->Request()->getParam(static::PARAM_ALWAYS_UP, false);
-            $precision = (int) $controller->Request()->getParam(static::PARAM_PRECISION, 10);
+            $precision = (float) $controller->Request()->getParam(static::PARAM_PRECISION, 10);
             $subtrahend = (float) $controller->Request()->getParam(static::PARAM_SUBTRAHEND, 1);
 
             $this->updateCurrencySettings($currencyId, $active, $alwaysUp, $precision, $subtrahend);

@@ -3,6 +3,6 @@
 //{$smarty.block.parent}
 { name: 'active', type: 'boolean' },
 { name: 'alwaysUp', type: 'boolean' },
-{ name: 'precision', type: 'int' },
+{ name: 'precision', type: 'float' },
 { name: 'subtrahend', type: 'float' },
 //{/block}
