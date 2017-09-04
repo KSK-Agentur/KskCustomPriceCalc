@@ -50,7 +50,6 @@ class PriceCalculation implements SubscriberInterface
      */
     public function __construct(ModelManager $modelManager, TaxHydrator $taxHydrator, ContextService $contextService)
     {
-
         $this->modelManager = $modelManager;
         $this->taxHydrator = $taxHydrator;
         $this->contextService = $contextService;
@@ -123,13 +122,19 @@ class PriceCalculation implements SubscriberInterface
 
         /** @var array $article */
         foreach ($articles as &$article) {
-            $article['netprice'] = $this->subtractTax($this->calculateExportPrices($article['netprice'], $tax, $context, $customerGroup), $tax);
-            $article['netprice_numeric'] = $this->subtractTax($this->calculateExportPrices($article['netprice_numeric'], $tax, $context, $customerGroup), $tax);
+            $article['netprice'] = $this->subtractTax($this->calculateExportPrices($article['netprice'], $tax, $context,
+                $customerGroup), $tax);
+            $article['netprice_numeric'] = $this->subtractTax($this->calculateExportPrices($article['netprice_numeric'],
+                $tax, $context, $customerGroup), $tax);
             $article['price'] = $this->calculateExportPrices($article['price'], $tax, $context, $customerGroup);
-            $article['price_numeric'] = $this->calculateExportPrices($article['price_numeric'], $tax, $context, $customerGroup);
-            $article['netpseudoprice'] = $this->subtractTax($this->calculateExportPrices($article['netpseudoprice'], $tax, $context, $customerGroup), $tax);
-            $article['netpseudoprice_numeric'] = $this->subtractTax($this->calculateExportPrices($article['netpseudoprice_numeric'], $tax, $context, $customerGroup), $tax);
-            $article['referenceprice'] = $this->calculateExportPrices($article['referenceprice'], $tax, $context, $customerGroup);
+            $article['price_numeric'] = $this->calculateExportPrices($article['price_numeric'], $tax, $context,
+                $customerGroup);
+            $article['netpseudoprice'] = $this->subtractTax($this->calculateExportPrices($article['netpseudoprice'],
+                $tax, $context, $customerGroup), $tax);
+            $article['netpseudoprice_numeric'] = $this->subtractTax($this->calculateExportPrices($article['netpseudoprice_numeric'],
+                $tax, $context, $customerGroup), $tax);
+            $article['referenceprice'] = $this->calculateExportPrices($article['referenceprice'], $tax, $context,
+                $customerGroup);
         }
 
         return $articles;
